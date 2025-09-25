@@ -2177,6 +2177,132 @@ export const questions: Question[] = [
     ],
     category: "Conservation Biology",
     difficulty: "hard"
+  },
+  {
+    id: 104,
+    question: "What is the key difference between species richness and species diversity?",
+    options: [
+      "Species richness includes abundance while species diversity only counts species.",
+      "Species richness only counts the number of species, while species diversity considers both the number of species and their relative abundances (evenness).",
+      "Species richness measures rare species while species diversity measures common species.",
+      "There is no difference - they are the same measure.",
+      "Species richness is measured at the ecosystem level while species diversity is measured at the population level."
+    ],
+    correctAnswer: 1,
+    explanation: "Species richness is simply the count of different species present in a community. Species diversity, however, is a more comprehensive measure that considers both species richness (how many species) and species evenness (how equally distributed their abundances are). A community can have high richness but low diversity if one species dominates.",
+    wrongAnswerExplanations: [
+      "This reverses the definitions - richness counts species while diversity includes abundance patterns.",
+      "Both measures can include rare and common species; the difference is in how abundance is considered.",
+      "These are distinct measures with species diversity being more comprehensive than richness alone.",
+      "Species richness and diversity can both be measured at various scales, not restricted to specific organizational levels."
+    ],
+    category: "Community Structure",
+    difficulty: "easy"
+  },
+  {
+    id: 105,
+    question: "The Shannon Diversity Index (H') is highest when a community has:",
+    options: [
+      "Many species with one highly dominant species.",
+      "Few species with equal abundances.",
+      "Many species with relatively equal abundances.",
+      "One species that makes up 90% of all individuals.",
+      "Only rare species with very low abundances."
+    ],
+    correctAnswer: 2,
+    explanation: "The Shannon Diversity Index reaches its maximum value when a community has both high species richness (many species) and high evenness (all species have similar abundances). This combination maximizes uncertainty in predicting which species a randomly selected individual will belong to.",
+    wrongAnswerExplanations: [
+      "Dominance by one species reduces evenness and lowers the Shannon index despite high richness.",
+      "Few species limits the maximum possible Shannon value even with perfect evenness.",
+      "Extreme dominance by one species minimizes both evenness and the Shannon index value.",
+      "Very low abundances don't necessarily create high diversity; it's the relative equality that matters."
+    ],
+    category: "Community Structure",
+    difficulty: "medium"
+  },
+  {
+    id: 106,
+    question: "Simpson's Diversity Index differs from Shannon's Index in that Simpson's Index:",
+    options: [
+      "Only measures species richness, not evenness.",
+      "Gives more weight to abundant species and measures the probability that two randomly selected individuals are the same species.",
+      "Can only be used for plant communities.",
+      "Measures genetic diversity within species rather than species diversity.",
+      "Is always higher than the Shannon Index for the same community."
+    ],
+    correctAnswer: 1,
+    explanation: "Simpson's Index measures the probability that two randomly selected individuals from a community belong to the same species. It gives more weight to abundant species than Shannon's Index, making it more sensitive to dominance patterns and less sensitive to rare species.",
+    wrongAnswerExplanations: [
+      "Simpson's Index incorporates both richness and evenness, like Shannon's Index.",
+      "Simpson's Index can be applied to any community type, not just plants.",
+      "Simpson's Index measures species diversity, not genetic diversity within species.",
+      "The relationship between Simpson's and Shannon's values depends on community structure and cannot be generalized."
+    ],
+    category: "Community Structure",
+    difficulty: "medium"
+  },
+  {
+    id: 107,
+    question: "In a rank-abundance curve, a steep slope indicates:",
+    options: [
+      "High species evenness with similar abundances across species.",
+      "Low species diversity with high dominance by a few species.",
+      "High species richness with many rare species.",
+      "Equal abundance of all species in the community.",
+      "Random distribution of individuals among species."
+    ],
+    correctAnswer: 1,
+    explanation: "A steep slope in a rank-abundance curve indicates high dominance inequality, where a few species are very abundant while most are rare. This pattern reflects low evenness and suggests that the community is dominated by relatively few species.",
+    wrongAnswerExplanations: [
+      "High evenness would produce a shallow, flat slope, not a steep one.",
+      "While there may be many rare species, the steep slope primarily indicates dominance patterns rather than richness.",
+      "Equal abundance would create a perfectly horizontal line, not a steep slope.",
+      "Random distribution would typically produce a moderate slope following a log-normal pattern."
+    ],
+    category: "Community Structure",
+    difficulty: "hard"
+  },
+  {
+    id: 108,
+    question: "Community composition refers to _____ while community structure refers to _____:",
+    options: [
+      "The number of species; the abundance of each species.",
+      "Which species are present; how those species are organized and interact within the community.",
+      "Rare species; common species.",
+      "Producer species; consumer species.",
+      "Native species; invasive species."
+    ],
+    correctAnswer: 1,
+    explanation: "Community composition is the identity or list of species present in a community (who is there), while community structure encompasses the organization, relationships, abundance patterns, and interactions among those species (how they are arranged and relate to each other).",
+    wrongAnswerExplanations: [
+      "This confuses composition with richness and structure with abundance; both aspects contribute to structure.",
+      "Both composition and structure can include rare and common species; this isn't the distinguishing factor.",
+      "Both composition and structure encompass all trophic levels, not just producers or consumers.",
+      "The native vs. invasive distinction relates to biogeography and invasion biology, not the composition-structure distinction."
+    ],
+    category: "Community Structure",
+    difficulty: "easy"
+  },
+  {
+    id: 109,
+    question: "In community ecology, rare species are often considered important because they:",
+    options: [
+      "Always become dominant over time through competitive exclusion.",
+      "Have no ecological impact and can be ignored in community studies.",
+      "May contribute disproportionately to community function, provide insurance against environmental change, and represent potential keystone species.",
+      "Only exist in disturbed habitats and indicate ecosystem damage.",
+      "Prevent dominant species from reproducing successfully."
+    ],
+    correctAnswer: 2,
+    explanation: "Rare species can have disproportionate ecological importance despite low abundance. They may perform unique ecosystem functions, provide biological insurance against environmental changes, serve as potential keystone species, or represent genetic reservoirs for future adaptation.",
+    wrongAnswerExplanations: [
+      "Most rare species remain rare; competitive exclusion often works against them, not in their favor.",
+      "Rare species can have significant ecological impacts despite low abundance - rarity doesn't equal irrelevance.",
+      "Rare species can occur in both pristine and disturbed habitats; their presence doesn't necessarily indicate damage.",
+      "Rare species typically don't prevent dominant species reproduction; they often coexist through niche differentiation."
+    ],
+    category: "Community Structure",
+    difficulty: "medium"
   }
 ];
 
