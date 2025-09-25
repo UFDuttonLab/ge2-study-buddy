@@ -176,10 +176,12 @@ export function QuestionCard({
             )}
 
             {!showAnswer && onNext && (
-              <div className="flex justify-center pt-4">
+              <div className="flex justify-center pt-4 pb-2">
                 <Button 
                   onClick={onNext}
-                  className="bg-primary hover:bg-primary/90"
+                  size="lg"
+                  className="bg-primary hover:bg-primary/90 min-h-[48px] px-8 py-3 text-base font-semibold touch-manipulation active:scale-95 transition-transform duration-150 sm:min-h-[44px] sm:px-6 sm:py-2 sm:text-sm"
+                  style={{ touchAction: 'manipulation' }}
                 >
                   {isLastQuestion ? "View Results" : "Next Question"}
                 </Button>
