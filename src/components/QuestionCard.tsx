@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, XCircle, Lightbulb } from "lucide-react";
+import { CheckCircle, XCircle, Lightbulb, ThumbsUp, ThumbsDown } from "lucide-react";
 import { Question } from "@/data/questions";
 import { cn } from "@/lib/utils";
 
@@ -25,11 +25,13 @@ export function QuestionCard({
 }: QuestionCardProps) {
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [hasAnswered, setHasAnswered] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   // Reset answer state when question changes
   useEffect(() => {
     setSelectedAnswer(null);
     setHasAnswered(false);
+    setIsAnimating(false);
   }, [question.id]);
 
   const handleAnswerSelect = (answerIndex: number) => {
@@ -37,37 +39,71 @@ export function QuestionCard({
     
     setSelectedAnswer(answerIndex);
     setHasAnswered(true);
+    setIsAnimating(true);
     
     const isCorrect = answerIndex === question.correctAnswer;
     onAnswer(answerIndex, isCorrect);
+
+    // Reset animation state after animation completes
+    setTimeout(() => setIsAnimating(false), 600);
   };
 
   const getOptionStyle = (index: number) => {
-    if (!hasAnswered && !showAnswer) return "hover:bg-accent/50";
+    const baseStyle = "transition-all duration-300";
+    
+    if (!hasAnswered && !showAnswer) return `${baseStyle} hover:bg-accent/50 hover:border-accent`;
     
     if (index === question.correctAnswer) {
-      return "bg-success/20 border-success text-success-foreground";
+      const animationClass = isAnimating && index === selectedAnswer ? "animate-success-pulse" : "";
+      return `${baseStyle} bg-success/40 border-2 border-success text-success-foreground shadow-lg ${animationClass}`;
     }
     
     if (hasAnswered && index === selectedAnswer && index !== question.correctAnswer) {
-      return "bg-destructive/20 border-destructive text-destructive-foreground";
+      const animationClass = isAnimating ? "animate-error-shake" : "";
+      return `${baseStyle} bg-destructive/40 border-2 border-destructive text-destructive-foreground shadow-lg ${animationClass}`;
     }
     
-    return "bg-muted/30";
+    return `${baseStyle} bg-muted/30 opacity-60`;
   };
 
   const getOptionIcon = (index: number) => {
     if (!hasAnswered && !showAnswer) return null;
     
     if (index === question.correctAnswer) {
-      return <CheckCircle className="h-5 w-5 text-success" />;
+      return <CheckCircle className="h-7 w-7 text-success font-bold" />;
     }
     
     if (hasAnswered && index === selectedAnswer && index !== question.correctAnswer) {
-      return <XCircle className="h-5 w-5 text-destructive" />;
+      return <XCircle className="h-7 w-7 text-destructive font-bold" />;
     }
     
     return null;
+  };
+
+  const getResultMessage = () => {
+    if (!hasAnswered || showAnswer) return null;
+    
+    const isCorrect = selectedAnswer === question.correctAnswer;
+    return (
+      <div className={cn(
+        "flex items-center gap-3 p-4 rounded-lg mb-4 font-semibold text-lg",
+        isCorrect 
+          ? "bg-success/20 text-success border border-success/30" 
+          : "bg-destructive/20 text-destructive border border-destructive/30"
+      )}>
+        {isCorrect ? (
+          <>
+            <ThumbsUp className="h-8 w-8" />
+            <span>Correct! Well done!</span>
+          </>
+        ) : (
+          <>
+            <ThumbsDown className="h-8 w-8" />
+            <span>Incorrect. Keep learning!</span>
+          </>
+        )}
+      </div>
+    );
   };
 
   return (
@@ -90,6 +126,7 @@ export function QuestionCard({
       </CardHeader>
       
       <CardContent className="space-y-4">
+        {getResultMessage()}
         <div className="grid gap-3">
           {question.options.map((option, index) => (
             <Button
