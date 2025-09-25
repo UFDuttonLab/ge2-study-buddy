@@ -86,9 +86,9 @@ export function QuizApp() {
                 <div className="inline-flex items-center justify-center w-12 h-12 bg-primary/10 rounded-full mb-3">
                   <BookOpen className="h-6 w-6 text-primary" />
                 </div>
-                <CardTitle className="text-xl">Random Practice</CardTitle>
+                <CardTitle className="text-xl">2 minute Challenge Quiz</CardTitle>
                 <p className="text-sm text-muted-foreground">
-                  Test your overall knowledge with 10 randomly selected questions from all topics
+                  Test your overall knowledge with 10 randomly selected questions from all topics (use while waiting for the bus or walking between classes)
                 </p>
               </CardHeader>
               <CardContent>
@@ -172,7 +172,7 @@ export function QuizApp() {
           </Button>
           <div className="flex items-center gap-4">
             <Badge variant="secondary" className="text-sm">
-              {quizType === 'category' ? selectedCategory : 'Random Practice'}
+              {quizType === 'category' ? selectedCategory : '2 minute Challenge Quiz'}
             </Badge>
             <div className="text-sm text-muted-foreground">
               {currentQuestionIndex + 1} of {questions.length}
