@@ -75,8 +75,7 @@ export function QuizApp() {
               Chris's Ecology Challenge 2
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Test your knowledge of community ecology with comprehensive practice questions and detailed explanations. 
-              Master species interactions, food webs, competition models, and more.
+              Get ready for the second exam!
             </p>
           </div>
 
@@ -128,7 +127,7 @@ export function QuizApp() {
           </div>
 
           <div className="text-center text-sm text-muted-foreground">
-            <p>80 comprehensive questions with detailed explanations</p>
+            <p>103 comprehensive questions with detailed explanations</p>
             <p>Learn why each answer choice is correct or incorrect</p>
           </div>
 
