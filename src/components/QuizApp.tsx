@@ -43,14 +43,14 @@ export function QuizApp() {
     };
     
     setAnswers(prev => [...prev, newAnswer]);
-    
-    setTimeout(() => {
-      if (currentQuestionIndex < questions.length - 1) {
-        setCurrentQuestionIndex(prev => prev + 1);
-      } else {
-        setCurrentMode('results');
-      }
-    }, 2000);
+  };
+
+  const handleNextQuestion = () => {
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex(prev => prev + 1);
+    } else {
+      setCurrentMode('results');
+    }
   };
 
   const resetQuiz = () => {
@@ -68,22 +68,22 @@ export function QuizApp() {
       <div className="min-h-screen bg-background p-4">
         <div className="max-w-4xl mx-auto space-y-8">
           <div className="text-center space-y-4">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-primary rounded-full shadow-glow mb-4">
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-primary rounded-full mb-4">
               <Brain className="h-10 w-10 text-primary-foreground" />
             </div>
-            <h1 className="text-4xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-              Community Ecology Study Hub
+            <h1 className="text-4xl font-bold text-foreground">
+              Chris's Ecology Challenge 2
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Master community ecology concepts with comprehensive practice questions and detailed explanations. 
-              Test your knowledge of species interactions, food webs, competition models, and more.
+              Test your knowledge of community ecology with comprehensive practice questions and detailed explanations. 
+              Master species interactions, food webs, competition models, and more.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
-            <Card className="bg-gradient-card shadow-card hover:shadow-glow transition-smooth cursor-pointer border-primary/20 hover:border-primary/40">
+            <Card className="shadow-lg hover:shadow-xl transition-all duration-200 cursor-pointer">
               <CardHeader className="text-center pb-4">
-                <div className="inline-flex items-center justify-center w-12 h-12 bg-primary/20 rounded-full mb-3">
+                <div className="inline-flex items-center justify-center w-12 h-12 bg-primary/10 rounded-full mb-3">
                   <BookOpen className="h-6 w-6 text-primary" />
                 </div>
                 <CardTitle className="text-xl">Random Practice</CardTitle>
@@ -94,7 +94,7 @@ export function QuizApp() {
               <CardContent>
                 <Button 
                   onClick={() => startQuiz('random')} 
-                  className="w-full bg-gradient-primary hover:shadow-glow transition-smooth"
+                  className="w-full bg-primary hover:bg-primary/90"
                   size="lg"
                 >
                   Start Random Quiz
@@ -102,9 +102,9 @@ export function QuizApp() {
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-card shadow-card hover:shadow-glow transition-smooth border-primary/20 hover:border-primary/40">
+            <Card className="shadow-lg hover:shadow-xl transition-all duration-200">
               <CardHeader className="text-center pb-4">
-                <div className="inline-flex items-center justify-center w-12 h-12 bg-success/20 rounded-full mb-3">
+                <div className="inline-flex items-center justify-center w-12 h-12 bg-success/10 rounded-full mb-3">
                   <Trophy className="h-6 w-6 text-success" />
                 </div>
                 <CardTitle className="text-xl">Study by Topic</CardTitle>
@@ -117,7 +117,7 @@ export function QuizApp() {
                   <Button
                     key={category}
                     variant="outline"
-                    className="w-full justify-start hover:bg-primary/10 hover:border-primary/30"
+                    className="w-full justify-start hover:bg-primary/5"
                     onClick={() => startQuiz('category', category)}
                   >
                     {category}
@@ -131,6 +131,20 @@ export function QuizApp() {
             <p>80 comprehensive questions with detailed explanations</p>
             <p>Learn why each answer choice is correct or incorrect</p>
           </div>
+
+          <footer className="mt-12 pt-8 border-t border-border text-center text-sm text-muted-foreground">
+            <p>
+              Developed by{" "}
+              <a 
+                href="https://ufduttonlab.github.io" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-primary hover:underline"
+              >
+                UF Dutton Lab
+              </a>
+            </p>
+          </footer>
         </div>
       </div>
     );
@@ -171,6 +185,8 @@ export function QuizApp() {
         <QuestionCard
           question={questions[currentQuestionIndex]}
           onAnswer={handleAnswer}
+          onNext={handleNextQuestion}
+          isLastQuestion={currentQuestionIndex === questions.length - 1}
         />
 
         <div className="text-center text-sm text-muted-foreground">

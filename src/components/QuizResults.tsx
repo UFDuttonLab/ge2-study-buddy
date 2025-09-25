@@ -33,9 +33,9 @@ export function QuizResults({ answers, questions, onRestart, quizType, category 
     <div className="min-h-screen bg-background p-4">
       <div className="max-w-4xl mx-auto space-y-8">
         {/* Results Header */}
-        <Card className="bg-gradient-card shadow-card text-center">
+        <Card className="text-center">
           <CardHeader className="pb-4">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-primary rounded-full shadow-glow mb-4 mx-auto">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-primary rounded-full mb-4 mx-auto">
               <PerformanceIcon className={`h-8 w-8 text-primary-foreground`} />
             </div>
             <CardTitle className="text-2xl mb-2">Quiz Complete!</CardTitle>
@@ -53,7 +53,7 @@ export function QuizResults({ answers, questions, onRestart, quizType, category 
           </CardHeader>
           <CardContent>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button onClick={onRestart} size="lg" className="bg-gradient-primary hover:shadow-glow transition-smooth">
+              <Button onClick={onRestart} size="lg" className="bg-primary hover:bg-primary/90">
                 <RotateCcw className="h-4 w-4 mr-2" />
                 Try Another Quiz
               </Button>
@@ -62,7 +62,7 @@ export function QuizResults({ answers, questions, onRestart, quizType, category 
         </Card>
 
         {/* Performance Breakdown */}
-        <Card className="bg-gradient-card shadow-card">
+        <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Target className="h-5 w-5 text-primary" />
@@ -72,21 +72,21 @@ export function QuizResults({ answers, questions, onRestart, quizType, category 
           <CardContent>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="text-center">
-                <div className="flex items-center justify-center w-12 h-12 bg-success/20 rounded-full mb-2 mx-auto">
+                <div className="flex items-center justify-center w-12 h-12 bg-success/10 rounded-full mb-2 mx-auto">
                   <CheckCircle className="h-6 w-6 text-success" />
                 </div>
                 <div className="text-2xl font-bold text-success">{correctCount}</div>
                 <div className="text-sm text-muted-foreground">Correct</div>
               </div>
               <div className="text-center">
-                <div className="flex items-center justify-center w-12 h-12 bg-destructive/20 rounded-full mb-2 mx-auto">
+                <div className="flex items-center justify-center w-12 h-12 bg-destructive/10 rounded-full mb-2 mx-auto">
                   <XCircle className="h-6 w-6 text-destructive" />
                 </div>
                 <div className="text-2xl font-bold text-destructive">{totalQuestions - correctCount}</div>
                 <div className="text-sm text-muted-foreground">Incorrect</div>
               </div>
               <div className="text-center">
-                <div className="flex items-center justify-center w-12 h-12 bg-primary/20 rounded-full mb-2 mx-auto">
+                <div className="flex items-center justify-center w-12 h-12 bg-primary/10 rounded-full mb-2 mx-auto">
                   <Trophy className="h-6 w-6 text-primary" />
                 </div>
                 <div className="text-2xl font-bold text-primary">{percentage}%</div>
@@ -119,7 +119,7 @@ export function QuizResults({ answers, questions, onRestart, quizType, category 
               <div key={question.id} className="relative">
                 <div className="absolute -left-4 top-6 z-10">
                   {answer?.isCorrect ? (
-                    <div className="flex items-center justify-center w-8 h-8 bg-success rounded-full shadow-success">
+                    <div className="flex items-center justify-center w-8 h-8 bg-success rounded-full">
                       <CheckCircle className="h-5 w-5 text-success-foreground" />
                     </div>
                   ) : (
@@ -141,11 +141,28 @@ export function QuizResults({ answers, questions, onRestart, quizType, category 
 
         {/* Action Buttons */}
         <div className="text-center pb-8">
-          <Button onClick={onRestart} size="lg" className="bg-gradient-primary hover:shadow-glow transition-smooth">
-            <RotateCcw className="h-4 w-4 mr-2" />
+          <Button 
+            className="w-full bg-primary hover:bg-primary/90" 
+            size="lg"
+            onClick={onRestart}
+          >
             Take Another Quiz
           </Button>
         </div>
+
+        <footer className="mt-12 pt-8 border-t border-border text-center text-sm text-muted-foreground">
+          <p>
+            Developed by{" "}
+            <a 
+              href="https://ufduttonlab.github.io" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-primary hover:underline"
+            >
+              UF Dutton Lab
+            </a>
+          </p>
+        </footer>
       </div>
     </div>
   );

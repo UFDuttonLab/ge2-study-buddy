@@ -9,23 +9,31 @@ import { cn } from "@/lib/utils";
 interface QuestionCardProps {
   question: Question;
   onAnswer: (selectedAnswer: number, isCorrect: boolean) => void;
+  onNext?: () => void;
+  isLastQuestion?: boolean;
   showAnswer?: boolean;
   className?: string;
 }
 
-export function QuestionCard({ question, onAnswer, showAnswer = false, className }: QuestionCardProps) {
+export function QuestionCard({ 
+  question, 
+  onAnswer, 
+  onNext, 
+  isLastQuestion = false,
+  showAnswer = false, 
+  className = "" 
+}: QuestionCardProps) {
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [hasAnswered, setHasAnswered] = useState(false);
 
   const handleAnswerSelect = (answerIndex: number) => {
-    if (hasAnswered) return;
+    if (hasAnswered && !showAnswer) return;
     
     setSelectedAnswer(answerIndex);
     setHasAnswered(true);
+    
     const isCorrect = answerIndex === question.correctAnswer;
-    setTimeout(() => {
-      onAnswer(answerIndex, isCorrect);
-    }, 1500);
+    onAnswer(answerIndex, isCorrect);
   };
 
   const getOptionStyle = (index: number) => {
@@ -57,7 +65,7 @@ export function QuestionCard({ question, onAnswer, showAnswer = false, className
   };
 
   return (
-    <Card className={cn("w-full max-w-4xl mx-auto bg-gradient-card shadow-card", className)}>
+    <Card className={cn("w-full max-w-4xl mx-auto", className)}>
       <CardHeader className="space-y-4">
         <div className="flex items-center justify-between">
           <Badge variant="secondary" className="text-xs">
@@ -83,7 +91,7 @@ export function QuestionCard({ question, onAnswer, showAnswer = false, className
               variant="outline"
               size="lg"
               className={cn(
-                "justify-start text-left h-auto py-4 px-6 transition-smooth",
+                "justify-start text-left h-auto py-4 px-6",
                 getOptionStyle(index),
                 !hasAnswered && !showAnswer && "cursor-pointer"
               )}
@@ -102,33 +110,38 @@ export function QuestionCard({ question, onAnswer, showAnswer = false, className
         </div>
 
         {(hasAnswered || showAnswer) && (
-          <div className="mt-6 p-6 bg-gradient-to-r from-primary/10 to-success/10 rounded-lg border border-primary/20">
-            <div className="flex items-start gap-3 mb-4">
-              <Lightbulb className="h-5 w-5 text-primary mt-0.5" />
-              <div>
-                <h4 className="font-semibold text-primary mb-2">Explanation</h4>
-                <p className="text-sm text-foreground leading-relaxed mb-4">
-                  {question.explanation}
-                </p>
-                
+          <div className="mt-6 space-y-4">
+            <div className="p-4 bg-muted rounded-lg">
+              <h4 className="font-semibold text-foreground mb-2">Explanation:</h4>
+              <p className="text-sm text-muted-foreground">{question.explanation}</p>
+            </div>
+            
+            {question.wrongAnswerExplanations && question.wrongAnswerExplanations.length > 0 && (
+              <div className="p-4 bg-muted rounded-lg">
+                <h4 className="font-semibold text-foreground mb-2">Why other answers are incorrect:</h4>
                 <div className="space-y-2">
-                  <h5 className="font-medium text-muted-foreground text-xs uppercase tracking-wider">
-                    Why other answers are incorrect:
-                  </h5>
-                  {question.wrongAnswerExplanations.map((explanation, index) => {
-                    const wrongIndex = index >= question.correctAnswer ? index + 1 : index;
-                    return (
-                      <div key={index} className="text-xs text-muted-foreground leading-relaxed">
-                        <span className="font-semibold text-destructive">
-                          {String.fromCharCode(65 + wrongIndex)}.
-                        </span>{" "}
-                        {explanation}
-                      </div>
-                    );
-                  })}
+                  {question.wrongAnswerExplanations.map((explanation, index) => (
+                    <p key={index} className="text-sm text-muted-foreground">
+                      <span className="font-medium">
+                        {String.fromCharCode(65 + (index >= question.correctAnswer ? index + 1 : index))}.
+                      </span>{" "}
+                      {explanation}
+                    </p>
+                  ))}
                 </div>
               </div>
-            </div>
+            )}
+
+            {!showAnswer && onNext && (
+              <div className="flex justify-center pt-4">
+                <Button 
+                  onClick={onNext}
+                  className="bg-primary hover:bg-primary/90"
+                >
+                  {isLastQuestion ? "View Results" : "Next Question"}
+                </Button>
+              </div>
+            )}
           </div>
         )}
       </CardContent>
