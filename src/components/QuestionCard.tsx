@@ -141,12 +141,14 @@ export function QuestionCard({
               onClick={() => handleAnswerSelect(index)}
               disabled={hasAnswered || showAnswer}
             >
-              <div className="flex items-center justify-between w-full">
-                <span className="text-sm leading-relaxed pr-4">
+              <div className="flex items-center gap-4 w-full min-w-0">
+                <span className="text-sm leading-relaxed flex-1 min-w-0 break-words whitespace-normal">
                   <span className="font-semibold mr-3">{String.fromCharCode(65 + index)}.</span>
                   {option}
                 </span>
-                {getOptionIcon(index)}
+                <div className="flex-shrink-0">
+                  {getOptionIcon(index)}
+                </div>
               </div>
             </Button>
           ))}

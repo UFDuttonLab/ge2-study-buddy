@@ -127,7 +127,7 @@ export function QuizApp() {
           </div>
 
           <div className="text-center text-sm text-muted-foreground">
-            <p>103 comprehensive questions with detailed explanations</p>
+            <p>109 comprehensive questions with detailed explanations</p>
             <p>Learn why each answer choice is correct or incorrect</p>
           </div>
 
