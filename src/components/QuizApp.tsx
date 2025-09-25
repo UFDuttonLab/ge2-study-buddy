@@ -182,12 +182,16 @@ export function QuizApp() {
 
         <Progress value={progress} className="h-2 bg-muted" />
 
-        <QuestionCard
-          question={questions[currentQuestionIndex]}
-          onAnswer={handleAnswer}
-          onNext={handleNextQuestion}
-          isLastQuestion={currentQuestionIndex === questions.length - 1}
-        />
+        {questions[currentQuestionIndex] ? (
+          <QuestionCard
+            question={questions[currentQuestionIndex]}
+            onAnswer={handleAnswer}
+            onNext={handleNextQuestion}
+            isLastQuestion={currentQuestionIndex === questions.length - 1}
+          />
+        ) : (
+          <div className="text-center text-muted-foreground">Loading question...</div>
+        )}
 
         <div className="text-center text-sm text-muted-foreground">
           Score: {correctAnswers}/{answers.length}
